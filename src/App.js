@@ -29,20 +29,24 @@ function App() {
 
       <hr />
 
-      {stories.map(function(story) {
-        return (
-          <div key={story.objectID}>
-            <span>
-              <a href={story.url}>{story.title}</a>
-            </span>
-            <span>{story.author}</span>
-            <span>{story.num_comments}</span>
-            <span>{story.points}</span>
-          </div>
-        );
-      })}
+      <List />
     </div>
   );
+}
+
+function List() {
+  return stories.map(function(story) {
+    return(
+      <div key={story.objectID}>
+        <span>
+          <a href={story.url}>{story.title}</a>
+        </span>
+        <span>{story.author}</span>
+        <span>{story.num_comments}</span>
+        <span>{story.points}</span>
+      </div>
+    );
+  });
 }
 
 export default App;

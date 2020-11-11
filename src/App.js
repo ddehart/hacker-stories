@@ -19,34 +19,29 @@ const stories = [
   },
 ];
 
-function App() {
-  return (
-    <div>
-      <h1>Hacker Stories</h1>
+const App = () => (
+  <div>
+    <h1>Hacker Stories</h1>
 
-      <label htmlFor='search'>Search: </label>
-      <input id='search' type='text' />
+    <label htmlFor='search'>Search: </label>
+    <input id='search' type='text' />
 
-      <hr />
+    <hr />
 
-      <List />
+    <List />
+  </div>
+);
+
+const List = () =>
+  stories.map(story => (
+    <div key={story.objectID}>
+      <span>
+        <a href={story.url}>{story.title}</a>
+      </span>
+      <span>{story.author}</span>
+      <span>{story.num_comments}</span>
+      <span>{story.points}</span>
     </div>
-  );
-}
-
-function List() {
-  return stories.map(function(story) {
-    return(
-      <div key={story.objectID}>
-        <span>
-          <a href={story.url}>{story.title}</a>
-        </span>
-        <span>{story.author}</span>
-        <span>{story.num_comments}</span>
-        <span>{story.points}</span>
-      </div>
-    );
-  });
-}
+  ));
 
 export default App;

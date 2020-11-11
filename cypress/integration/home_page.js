@@ -4,10 +4,10 @@ describe('The home page', () =>{
   });
 
   it('has the React App title', () => {
-    cy.title().should('equal', 'React App');
+    cy.title().should('equal', 'Hello World');
   });
 
-  it('has the generic React App text', () => {
-    cy.contains('Edit src/App.js and save to reload.');
+  it('has Hello World text', () => {
+    cy.contains('Hello World');
   });
 });

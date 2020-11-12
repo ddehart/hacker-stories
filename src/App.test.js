@@ -29,11 +29,13 @@ describe('The App', () => {
     }
   });
 
-  test('logs events to the console when typing into the search input', () => {
-    const consoleSpy = jest.spyOn(console, 'log');
+  test('renders the searching for text when typing in the search textbox', () => {
+    const searchBox = screen.getByRole('textbox', {name: 'Search:'});
 
-    userEvent.type(screen.getByRole('textbox', {name: 'Search:'}), 'test');
+    userEvent.type(searchBox, 'test');
+    expect(screen.getByTestId('searching-for')).toHaveTextContent('Searching for test.');
 
-    expect(consoleSpy).toBeCalledTimes(4);
+    userEvent.type(searchBox, 'ing');
+    expect(screen.getByTestId('searching-for')).toHaveTextContent('Searching for testing.');
   });
 });

@@ -36,4 +36,12 @@ describe('The home page', () =>{
         }
       });
   });
+
+  it('updates the searching for text when typing in the search textbox', () => {
+    cy.get('#search').type('test');
+    cy.get('p:contains("Searching for test.")').should('exist');
+
+    cy.get('#search').type('ing');
+    cy.get('p:contains("Searching for testing.")').should('exist');
+  });
 });

@@ -49,7 +49,7 @@ const Search = props => {
   return (
     <div>
       <label htmlFor='search'>Search: </label>
-      <input id='search' type='text' onChange={handleChange}/>
+      <input id='search' type='text' name='story-search' autoComplete='story-search' onChange={handleChange}/>
 
       <p data-testid='searching-for'>
         Searching for <strong>{searchTerm}</strong>.

@@ -38,4 +38,12 @@ describe('The App', () => {
     userEvent.type(searchBox, 'ing');
     expect(screen.getByTestId('searching-for')).toHaveTextContent('Searching for testing.');
   });
+
+  test('logs to the console when typing in the search textbox', () => {
+    const consoleSpy = jest.spyOn(console, 'log');
+
+    userEvent.type(screen.getByRole('textbox', {name: 'Search:'}), 'test');
+
+    expect(consoleSpy).toHaveBeenCalledTimes(4);
+  });
 });

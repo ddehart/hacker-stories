@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
 
 describe('The App', () => {
@@ -26,5 +27,13 @@ describe('The App', () => {
       screen.getByText(story.num_comments.toString());
       screen.getByText(story.points.toString());
     }
+  });
+
+  test('logs events to the console when typing into the search input', () => {
+    const consoleSpy = jest.spyOn(console, 'log');
+
+    userEvent.type(screen.getByRole('textbox', {name: 'Search:'}), 'test');
+
+    expect(consoleSpy).toBeCalledTimes(4);
   });
 });

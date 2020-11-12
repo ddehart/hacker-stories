@@ -19,18 +19,24 @@ const stories = [
   },
 ];
 
-const App = () => (
-  <div>
-    <h1>Hacker Stories</h1>
+const App = () => {
+  const handleChange = event => {
+    console.log(event)
+  };
 
-    <label htmlFor='search'>Search: </label>
-    <input id='search' type='text' />
+  return (
+    <div>
+      <h1>Hacker Stories</h1>
 
-    <hr />
+      <label htmlFor='search'>Search: </label>
+      <input id='search' type='text' onChange={handleChange}/>
 
-    <List />
-  </div>
-);
+      <hr/>
+
+      <List/>
+    </div>
+  );
+}
 
 const List = () =>
   stories.map(story => (

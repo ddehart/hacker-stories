@@ -37,11 +37,12 @@ describe('The home page', () =>{
       });
   });
 
-  it('updates the searching for text when typing in the search textbox', () => {
-    cy.get('#search').type('test');
-    cy.get('p:contains("Searching for test.")').should('exist');
+  it('filters the list of stories given text in the search textbox', () => {
+    cy.get('#search').clear();
 
-    cy.get('#search').type('ing');
-    cy.get('p:contains("Searching for testing.")').should('exist');
+    cy.get('#search').type('react');
+
+    cy.get('div:contains("React")').should('exist');
+    cy.get('div:contains("Redux")').should('not.exist');
   });
 });

@@ -29,21 +29,11 @@ describe('The App', () => {
     }
   });
 
-  test('renders the searching for text when typing in the search textbox', () => {
+  test('renders the list of stories based on text typed into the search textbox', () => {
     const searchBox = screen.getByRole('textbox', {name: 'Search:'});
 
-    userEvent.type(searchBox, 'test');
-    expect(screen.getByTestId('searching-for')).toHaveTextContent('Searching for test.');
-
-    userEvent.type(searchBox, 'ing');
-    expect(screen.getByTestId('searching-for')).toHaveTextContent('Searching for testing.');
-  });
-
-  test('logs to the console when typing in the search textbox', () => {
-    const consoleSpy = jest.spyOn(console, 'log');
-
-    userEvent.type(screen.getByRole('textbox', {name: 'Search:'}), 'test');
-
-    expect(consoleSpy).toHaveBeenCalledTimes(4);
+    userEvent.type(searchBox, 'react');
+    expect(screen.queryByText('React')).toBeInTheDocument();
+    expect(screen.queryByText('Redux')).not.toBeInTheDocument();
   });
 });

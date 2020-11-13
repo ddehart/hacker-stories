@@ -18,12 +18,32 @@ describe('The home page', () =>{
       .and('have.attr', 'for', 'search');
   });
 
-  it('has a search input', () => {
+  it('has a text input with an initial value', () => {
     cy.get('#search')
-      .should('have.attr', 'type', 'text');
+      .should('have.attr', 'type', 'text')
+      .and('have.value', 'React');
   });
 
-  it('has a list of stories', () => {
+  it('has a list of stories based on the initial value of the text input', () => {
+    cy.fixture('stories.json').as('stories');
+
+    cy.get('@stories')
+      .then(stories => {
+        const filteredStories = stories.filter(story =>
+          story.title.includes('React')
+        );
+
+        for(const story of filteredStories) {
+          cy.get('a:contains("' + story.title + '")').should('have.attr', 'href', story.url);
+          cy.get('span:contains("' + story.author + '")').should('exist');
+          cy.get('span:contains("' + story.num_comments + '")').should('exist');
+          cy.get('span:contains("' + story.points + '")').should('exist');
+        }
+      });
+  });
+
+  it('lists all stories when the initial text gets cleared', () => {
+    cy.get('#search').clear();
     cy.fixture('stories.json').as('stories');
 
     cy.get('@stories')

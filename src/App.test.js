@@ -4,10 +4,24 @@ import userEvent from '@testing-library/user-event';
 import App from './App';
 
 describe('The App', () => {
-  let stories = [];
+  let stories = require('../cypress/fixtures/stories.json');
+  let searchBox;
+
+  const storiesRendered = (stories) => (
+    stories.filter(story => (
+        screen.queryByText(story.title) &&
+        screen.queryByText(story.title).getAttribute('href') === story.url &&
+        screen.queryByText(story.author) &&
+        screen.queryByText(story.num_comments.toString()) &&
+        screen.queryByText(story.points.toString())
+      )
+    )
+  );
 
   beforeEach(() => {
     render(<App />);
+
+    searchBox = screen.getByRole('textbox', {name: 'Search:'});
   });
 
   test('renders Hello React heading', () => {
@@ -15,46 +29,35 @@ describe('The App', () => {
   });
 
   test('renders search text input with an initial value', () => {
-    const searchBox = screen.getByRole('textbox', {name: 'Search:'});
-
     expect(searchBox).toBeInTheDocument();
     expect(searchBox).toHaveValue('React');
   });
 
   test('renders a story based on the initial value of the text input', () => {
-    stories = require('../cypress/fixtures/stories.json');
-    const filteredStories = stories.filter(story =>
-      story.title.includes('React')
-    );
+    const filteredStories = stories.filter(story => story.title.includes('React'));
+    const renderedStories = storiesRendered(filteredStories);
 
-    for(const story of filteredStories) {
-      expect(screen.getByText(story.title)).toHaveAttribute('href', story.url);
-      screen.getByText(story.author);
-      screen.getByText(story.num_comments.toString());
-      screen.getByText(story.points.toString());
-    }
+    expect(renderedStories).toEqual(filteredStories);
+    expect(screen.queryByText('Redux')).not.toBeInTheDocument();
   });
 
   test('renders all stories with no value in the text input', () => {
-    const searchBox = screen.getByRole('textbox', {name: 'Search:'});
-    stories = require('../cypress/fixtures/stories.json');
-
     userEvent.clear(searchBox);
 
-    for(const story of stories) {
-      expect(screen.getByText(story.title)).toHaveAttribute('href', story.url);
-      screen.getByText(story.author);
-      screen.getByText(story.num_comments.toString());
-      screen.getByText(story.points.toString());
-    }
+    const renderedStories = storiesRendered(stories);
+
+    expect(renderedStories).toEqual(stories);
   });
 
   test('renders the list of stories based on text typed into the search textbox', () => {
-    const searchBox = screen.getByRole('textbox', {name: 'Search:'});
-    userEvent.clear(searchBox);
+    const filteredStories = stories.filter(story => story.title.toLowerCase().includes('redux'));
 
-    userEvent.type(searchBox, 'react');
-    expect(screen.queryByText('React')).toBeInTheDocument();
-    expect(screen.queryByText('Redux')).not.toBeInTheDocument();
+    userEvent.clear(searchBox);
+    userEvent.type(searchBox, 'redux');
+
+    const renderedStories = storiesRendered(filteredStories);
+
+    expect(renderedStories).toEqual(filteredStories);
+    expect(screen.queryByText('React')).not.toBeInTheDocument();
   });
 });

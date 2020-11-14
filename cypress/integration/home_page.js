@@ -61,9 +61,21 @@ describe('The home page', () =>{
   it('filters the list of stories given text in the search textbox', () => {
     cy.get('#search').clear();
 
-    cy.get('#search').type('react');
+    cy.get('#search').type('redux');
 
-    cy.get('div:contains("React")').should('exist');
-    cy.get('div:contains("Redux")').should('not.exist');
+    cy.get('div:contains("Redux")').should('exist');
+    cy.get('div:contains("React")').should('not.exist');
+  });
+
+  it('retains the last search term on reload', () => {
+    cy.get('#search').clear();
+
+    cy.get('#search').type('redux');
+
+    cy.reload();
+
+    cy.get('#search').should('have.value', 'redux');
+    cy.get('div:contains("Redux")').should('exist');
+    cy.get('div:contains("React")').should('not.exist');
   });
 });

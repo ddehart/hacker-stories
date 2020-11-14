@@ -60,4 +60,21 @@ describe('The App', () => {
     expect(renderedStories).toEqual(filteredStories);
     expect(screen.queryByText('React')).not.toBeInTheDocument();
   });
+
+  test('sets the search term in local storage', () => {
+    userEvent.clear(searchBox);
+    userEvent.type(searchBox, 'redux');
+
+    let localStorageSearch = localStorage.getItem('search');
+
+    expect(localStorageSearch).toBe('redux');
+  });
+
+  test('gets the initial search term from local storage', () => {
+    let localStorageSearch = localStorage.getItem('search');
+
+    expect(localStorageSearch).toBe('redux');
+    expect(screen.queryByDisplayValue('redux')).toBeInTheDocument();
+    expect(searchBox).toHaveValue('redux');
+  });
 });

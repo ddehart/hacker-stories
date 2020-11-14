@@ -43,8 +43,7 @@ const App = () => {
   );
 };
 
-const Search = props => {
-  return (
+const Search = ({ search, onSearch }) => (
     <div>
       <label htmlFor='search'>Search: </label>
       <input
@@ -52,12 +51,11 @@ const Search = props => {
         type='text'
         name='story-search'
         autoComplete='story-search'
-        value={props.search}
-        onChange={props.onSearch}
+        value={search}
+        onChange={onSearch}
       />
     </div>
-  );
-};
+);
 
 const List = props =>
   props.list.map(story => (

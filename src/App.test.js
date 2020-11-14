@@ -28,22 +28,12 @@ describe('The App', () => {
     expect(screen.getByRole('heading')).toHaveTextContent('Hacker Stories');
   });
 
-  test('renders search text input with an initial value', () => {
+  test('renders search text input with no initial value', () => {
     expect(searchBox).toBeInTheDocument();
-    expect(searchBox).toHaveValue('React');
-  });
-
-  test('renders a story based on the initial value of the text input', () => {
-    const filteredStories = stories.filter(story => story.title.includes('React'));
-    const renderedStories = storiesRendered(filteredStories);
-
-    expect(renderedStories).toEqual(filteredStories);
-    expect(screen.queryByText('Redux')).not.toBeInTheDocument();
+    expect(searchBox).toHaveValue('');
   });
 
   test('renders all stories with no value in the text input', () => {
-    userEvent.clear(searchBox);
-
     const renderedStories = storiesRendered(stories);
 
     expect(renderedStories).toEqual(stories);

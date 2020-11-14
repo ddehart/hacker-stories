@@ -2,7 +2,7 @@ import React from 'react';
 
 const useSemiPersistentState = () => {
   const [value, setValue] = React.useState(
-    localStorage.getItem('value') || 'React'
+    localStorage.getItem('value') || ''
   );
 
   React.useEffect(() => {

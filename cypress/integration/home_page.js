@@ -1,4 +1,11 @@
 describe('The home page', () =>{
+  const validateStoryExists = (story) => {
+    cy.get('a:contains("' + story.title + '")').should('have.attr', 'href', story.url);
+    cy.get('span:contains("' + story.author + '")').should('exist');
+    cy.get('span:contains("' + story.num_comments + '")').should('exist');
+    cy.get('span:contains("' + story.points + '")').should('exist');
+  };
+
   it('loads', () => {
     cy.visit('/');
   });
@@ -34,10 +41,7 @@ describe('The home page', () =>{
         );
 
         for(const story of filteredStories) {
-          cy.get('a:contains("' + story.title + '")').should('have.attr', 'href', story.url);
-          cy.get('span:contains("' + story.author + '")').should('exist');
-          cy.get('span:contains("' + story.num_comments + '")').should('exist');
-          cy.get('span:contains("' + story.points + '")').should('exist');
+          validateStoryExists(story);
         }
       });
   });
@@ -49,10 +53,7 @@ describe('The home page', () =>{
     cy.get('@stories')
       .then(stories => {
         for(const story of stories) {
-          cy.get('a:contains("' + story.title + '")').should('have.attr', 'href', story.url);
-          cy.get('span:contains("' + story.author + '")').should('exist');
-          cy.get('span:contains("' + story.num_comments + '")').should('exist');
-          cy.get('span:contains("' + story.points + '")').should('exist');
+          validateStoryExists(story);
         }
       });
   });

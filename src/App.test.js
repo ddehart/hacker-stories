@@ -21,7 +21,7 @@ describe('The App', () => {
   beforeEach(() => {
     render(<App />);
 
-    searchBox = screen.getByRole('textbox', {name: 'Search'});
+    searchBox = screen.getByRole('textbox', {name: 'Search:'});
   });
 
   test('renders Hello React heading', () => {

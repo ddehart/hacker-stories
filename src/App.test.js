@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
@@ -50,6 +50,15 @@ describe('The App', () => {
     const renderedStories = storiesRendered(stories);
 
     expect(renderedStories).toEqual(stories);
+  });
+
+  test('renders a Dismiss button next to each story', () => {
+    userEvent.clear(searchBox);
+
+    for(const story of stories) {
+      const storyDiv = screen.getByText(story.points.toString()).parentElement;
+      expect(within(storyDiv).getByRole('button', {name: 'Dismiss'})).toBeInTheDocument();
+    }
   });
 
   test('renders the list of stories based on text typed into the search textbox', () => {

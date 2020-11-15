@@ -63,6 +63,16 @@ describe('The home page', () =>{
       });
   });
 
+  it('has a dismiss button next to each story', () => {
+    cy.get('@stories').then(stories => {
+      for(const story of stories) {
+        cy.get('div.story:contains("' + story.title + '")').within(() => {
+          cy.get('button').should('have.text', 'Dismiss');
+        });
+      }
+    });
+  });
+
   it('filters the list of stories given text in the search textbox', () => {
     cy.get('#search').clear();
     cy.get('#search').type('redux');

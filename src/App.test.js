@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
@@ -18,10 +18,14 @@ describe('The App', () => {
     )
   );
 
-  beforeEach(() => {
-    render(<App />);
+  beforeEach(async () => {
+    await waitFor(() => render(<App />));
 
     searchBox = screen.getByRole('textbox', {name: 'Search:'});
+
+    await waitFor(() =>
+      expect(document.querySelector('div.story')).toBeInTheDocument()
+    );
   });
 
   test('renders Hacker Stories heading', () => {

@@ -18,7 +18,7 @@ describe('The home page', () =>{
     cy.title().should('equal', 'Hacker Stories');
   });
 
-  it('has Hello React text', () => {
+  it('has the Hacker Stories header', () => {
     cy.get('h1')
       .should('have.text', 'Hacker Stories')
   });

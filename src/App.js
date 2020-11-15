@@ -46,12 +46,11 @@ const App = () => {
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  //TODO: remove label
   return (
     <div>
       <h1>Hacker Stories</h1>
 
-      <InputWithLabel id={'search'} label={'Search'} value={searchTerm} isFocused onInputChange={handleSearch}>
+      <InputWithLabel id={'search'} value={searchTerm} isFocused onInputChange={handleSearch}>
         <strong>Search:</strong>
       </InputWithLabel>
 

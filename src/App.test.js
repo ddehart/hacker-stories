@@ -24,6 +24,7 @@ describe('The App', () => {
     searchBox = screen.getByRole('textbox', {name: 'Search:'});
 
     expect(screen.getByText('Loading ...')).toBeInTheDocument();
+    expect(screen.queryByText('Something went wrong ...')).not.toBeInTheDocument();
 
     await waitFor(() =>
       expect(document.querySelector('div.story')).toBeInTheDocument()

@@ -18,6 +18,10 @@ describe('The home page', () =>{
     cy.get('p:contains("Loading ...")').should('exist');
   });
 
+  it('does not display an error', () => {
+    cy.get('p:contains("Something went wrong ...")').should('not.exist');
+  });
+
   it('has the React App title', () => {
     cy.title().should('equal', 'Hacker Stories');
   });

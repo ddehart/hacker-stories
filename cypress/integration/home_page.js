@@ -6,6 +6,10 @@ describe('The home page', () =>{
     cy.get('span:contains("' + story.points + '")').should('exist');
   };
 
+  beforeEach(() => {
+    cy.fixture('stories.json').as('stories');
+  });
+
   it('loads', () => {
     cy.visit('/');
   });
@@ -25,15 +29,27 @@ describe('The home page', () =>{
       .and('have.attr', 'for', 'search');
   });
 
-  it('has a search box with no initial value', () => {
+  it('has a search box with an initial value', () => {
     cy.get('#search')
       .should('have.attr', 'type', 'text')
-      .and('have.value', '');
+      .and('have.value', 'React');
+  });
+
+  it('has a list of stories based on the initial value in the search box', () => {
+    cy.get('@stories')
+      .then(stories => {
+        const filteredStories = stories.filter(story =>
+          story.title.includes('React')
+        );
+
+        for(const story of filteredStories) {
+          validateStoryExists(story);
+        }
+      });
   });
 
   it('lists all stories with no value in the search box', () => {
     cy.get('#search').clear();
-    cy.fixture('stories.json').as('stories');
 
     cy.get('@stories')
       .then(stories => {
@@ -44,6 +60,7 @@ describe('The home page', () =>{
   });
 
   it('filters the list of stories given text in the search textbox', () => {
+    cy.get('#search').clear();
     cy.get('#search').type('redux');
 
     cy.get('div:contains("Redux")').should('exist');

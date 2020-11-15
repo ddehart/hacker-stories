@@ -24,8 +24,7 @@ describe('The App', () => {
     searchBox = screen.getByRole('textbox', {name: 'Search:'});
   });
 
-  //TODO: fix test title
-  test('renders Hello React heading', () => {
+  test('renders Hacker Stories heading', () => {
     expect(screen.getByRole('heading')).toHaveTextContent('Hacker Stories');
   });
 

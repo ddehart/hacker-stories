@@ -55,13 +55,13 @@ describe('The App', () => {
     userEvent.clear(searchBox);
     userEvent.type(searchBox, 'redux');
 
-    let localStorageSearch = localStorage.getItem('value');
+    let localStorageSearch = localStorage.getItem('search');
 
     expect(localStorageSearch).toBe('redux');
   });
 
   test('gets the initial search term from local storage', () => {
-    let localStorageSearch = localStorage.getItem('value');
+    let localStorageSearch = localStorage.getItem('search');
 
     expect(localStorageSearch).toBe('redux');
     expect(screen.queryByDisplayValue('redux')).toBeInTheDocument();

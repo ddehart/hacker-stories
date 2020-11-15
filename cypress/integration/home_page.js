@@ -92,4 +92,14 @@ describe('The home page', () =>{
     cy.get('div:contains("Redux")').should('exist');
     cy.get('div:contains("React")').should('not.exist');
   });
+
+  it('removes a story from the list upon clicking the Dismiss button', () => {
+    cy.get('#search').clear();
+
+    cy.get('div.story:contains("Redux")').within(() => {
+      cy.get('button').click();
+    });
+
+    cy.get('div:contains("Redux")').should('not.exist');
+  });
 });

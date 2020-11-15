@@ -89,4 +89,12 @@ describe('The App', () => {
     expect(screen.queryByDisplayValue('redux')).toBeInTheDocument();
     expect(searchBox).toHaveValue('redux');
   });
+
+  test('removes an item from the list upon clicking the Dismiss button', () => {
+    userEvent.clear(searchBox);
+    const reduxDiv = screen.getByText('5').parentElement;
+    within(reduxDiv).getByRole('button', {name: 'Dismiss'}).click();
+
+    expect(screen.queryByText('Redux')).not.toBeInTheDocument();
+  });
 });

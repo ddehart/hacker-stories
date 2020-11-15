@@ -25,7 +25,7 @@ describe('The home page', () =>{
 
   it('has a search label', () => {
     cy.get('label')
-      .should('contain.text', 'Search:')
+      .should('contain.text', 'Search')
       .and('have.attr', 'for', 'search');
   });
 

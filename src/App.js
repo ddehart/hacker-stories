@@ -46,11 +46,12 @@ const App = () => {
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  //TODO: remove label
   return (
     <div>
       <h1>Hacker Stories</h1>
 
-      <InputWithLabel id={'search'} label={'Search'} value={searchTerm} onInputChange={handleSearch}>
+      <InputWithLabel id={'search'} label={'Search'} value={searchTerm} isFocused onInputChange={handleSearch}>
         <strong>Search:</strong>
       </InputWithLabel>
 
@@ -61,10 +62,20 @@ const App = () => {
   );
 };
 
-const InputWithLabel = ({ id, value, type = 'text', onInputChange, children }) => (
+const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, children }) => {
+  const inputRef = React.useRef();
+
+  React.useEffect(() => {
+    if (isFocused) {
+      inputRef.current.focus();
+    }
+  }, [isFocused]);
+
+  return (
     <>
       <label htmlFor={id}>{children}</label>
       <input
+        ref={inputRef}
         id={id}
         type={type}
         name='story-search'
@@ -73,7 +84,8 @@ const InputWithLabel = ({ id, value, type = 'text', onInputChange, children }) =
         onChange={onInputChange}
       />
     </>
-);
+  );
+};
 
 const List = ({ list }) =>
   list.map(item => <Item key={item.objectID} item={item} />);

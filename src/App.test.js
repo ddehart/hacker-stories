@@ -24,6 +24,7 @@ describe('The App', () => {
     searchBox = screen.getByRole('textbox', {name: 'Search:'});
   });
 
+  //TODO: fix test title
   test('renders Hello React heading', () => {
     expect(screen.getByRole('heading')).toHaveTextContent('Hacker Stories');
   });
@@ -31,6 +32,10 @@ describe('The App', () => {
   test('renders search text input with an initial value', () => {
     expect(searchBox).toBeInTheDocument();
     expect(searchBox).toHaveValue('React');
+  });
+
+  test('renders search text input with focus', () => {
+    expect(searchBox).toHaveFocus();
   });
 
   test('renders a story based on the initial value of the text input', () => {

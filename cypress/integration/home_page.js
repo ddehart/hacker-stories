@@ -35,6 +35,10 @@ describe('The home page', () =>{
       .and('have.value', 'React');
   });
 
+  it('is immediately focused on the search box', () => {
+    cy.get('#search').should('have.focus');
+  });
+
   it('has a list of stories based on the initial value in the search box', () => {
     cy.get('@stories')
       .then(stories => {

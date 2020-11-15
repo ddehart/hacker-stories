@@ -47,10 +47,14 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'React');
 
   const [stories, setStories] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
+    setIsLoading(true);
+
     getAsyncStories().then(result => {
       setStories(result.data.stories);
+      setIsLoading(false);
     });
   }, []);
 
@@ -80,7 +84,11 @@ const App = () => {
 
       <hr/>
 
-      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+      {isLoading ? (
+        <p>Loading ...</p>
+      ) : (
+        <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+      )}
     </div>
   );
 };

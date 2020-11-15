@@ -14,6 +14,10 @@ describe('The home page', () =>{
     cy.visit('/');
   });
 
+  it('has a loading indicator before the list has loaded', () => {
+    cy.get('p:contains("Loading ...")').should('exist');
+  });
+
   it('has the React App title', () => {
     cy.title().should('equal', 'Hacker Stories');
   });

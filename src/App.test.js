@@ -3,6 +3,8 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
+jest.spyOn(global, 'fetch');
+
 describe('The App', () => {
   let stories = require('../cypress/fixtures/stories.json');
   let searchBox;
@@ -19,6 +21,17 @@ describe('The App', () => {
   );
 
   beforeEach(async () => {
+    global.fetch.mockImplementation(() => {
+      return new Promise(resolve =>
+        setTimeout(
+          () => resolve({
+            ok: true,
+            json: () => stories,
+          }), 50
+        )
+      );
+    });
+
     await waitFor(() => render(<App />));
 
     searchBox = screen.getByRole('textbox', {name: 'Search:'});
@@ -45,62 +58,60 @@ describe('The App', () => {
   });
 
   test('renders a story based on the initial value of the text input', () => {
-    const filteredStories = stories.filter(story => story.title.includes('React'));
+    const filteredStories = stories.hits.filter(story => story.title.includes('React'));
     const renderedStories = storiesRendered(filteredStories);
 
     expect(renderedStories).toEqual(filteredStories);
-    expect(screen.queryByText('Redux')).not.toBeInTheDocument();
   });
 
   test('renders all stories with no value in the text input', () => {
     userEvent.clear(searchBox);
-    const renderedStories = storiesRendered(stories);
+    const renderedStories = storiesRendered(stories.hits);
 
-    expect(renderedStories).toEqual(stories);
+    expect(renderedStories).toEqual(stories.hits);
   });
 
   test('renders a Dismiss button next to each story', () => {
     userEvent.clear(searchBox);
 
-    for(const story of stories) {
+    for(const story of stories.hits) {
       const storyDiv = screen.getByText(story.points.toString()).parentElement;
       expect(within(storyDiv).getByRole('button', {name: 'Dismiss'})).toBeInTheDocument();
     }
   });
 
   test('renders the list of stories based on text typed into the search textbox', () => {
-    const filteredStories = stories.filter(story => story.title.toLowerCase().includes('redux'));
+    const filteredStories = stories.hits.filter(story => story.title.toLowerCase().includes('redux'));
 
     userEvent.clear(searchBox);
-    userEvent.type(searchBox, 'redux');
+    userEvent.type(searchBox, 'vue');
 
     const renderedStories = storiesRendered(filteredStories);
 
     expect(renderedStories).toEqual(filteredStories);
-    expect(screen.queryByText('React')).not.toBeInTheDocument();
   });
 
   test('sets the search term in local storage', () => {
     userEvent.clear(searchBox);
-    userEvent.type(searchBox, 'redux');
+    userEvent.type(searchBox, 'vue');
 
     let localStorageSearch = localStorage.getItem('search');
 
-    expect(localStorageSearch).toBe('redux');
+    expect(localStorageSearch).toBe('vue');
   });
 
   test('gets the initial search term from local storage', () => {
     let localStorageSearch = localStorage.getItem('search');
 
-    expect(localStorageSearch).toBe('redux');
-    expect(screen.queryByDisplayValue('redux')).toBeInTheDocument();
-    expect(searchBox).toHaveValue('redux');
+    expect(localStorageSearch).toBe('vue');
+    expect(screen.queryByDisplayValue('vue')).toBeInTheDocument();
+    expect(searchBox).toHaveValue('vue');
   });
 
   test('removes an item from the list upon clicking the Dismiss button', () => {
     userEvent.clear(searchBox);
-    const reduxDiv = screen.getByText('5').parentElement;
-    within(reduxDiv).getByRole('button', {name: 'Dismiss'}).click();
+    const dismissDiv = screen.getByText('2280').parentElement;
+    within(dismissDiv).getByRole('button', {name: 'Dismiss'}).click();
 
     expect(screen.queryByText('Redux')).not.toBeInTheDocument();
   });

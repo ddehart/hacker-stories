@@ -6,6 +6,11 @@ describe('The home page', () =>{
     cy.get('span:contains("' + story.points + '")').should('exist');
   };
 
+  const filterStories = (stories, filter) =>
+    stories.filter(
+      story => story.title.includes(filter)
+    );
+
   beforeEach(() => {
     cy.fixture('stories.json').as('stories');
   });
@@ -50,9 +55,7 @@ describe('The home page', () =>{
   it('has a list of stories based on the initial value in the search box', () => {
     cy.get('@stories')
       .then(stories => {
-        const filteredStories = stories.filter(story =>
-          story.title.includes('React')
-        );
+        const filteredStories = filterStories(stories.hits, 'React');
 
         for(const story of filteredStories) {
           validateStoryExists(story);
@@ -65,7 +68,7 @@ describe('The home page', () =>{
 
     cy.get('@stories')
       .then(stories => {
-        for(const story of stories) {
+        for(const story of stories.hits) {
           validateStoryExists(story);
         }
       });
@@ -73,7 +76,7 @@ describe('The home page', () =>{
 
   it('has a dismiss button next to each story', () => {
     cy.get('@stories').then(stories => {
-      for(const story of stories) {
+      for(const story of stories.hits) {
         cy.get('div.story:contains("' + story.title + '")').within(() => {
           cy.get('button').should('have.text', 'Dismiss');
         });
@@ -85,29 +88,40 @@ describe('The home page', () =>{
     cy.get('#search').clear();
     cy.get('#search').type('redux');
 
-    cy.get('div:contains("Redux")').should('exist');
-    cy.get('div:contains("React")').should('not.exist');
+    cy.get('@stories')
+      .then(stories => {
+        const filteredStories = filterStories(stories.hits, 'redux');
+
+        for(const story of filteredStories) {
+          validateStoryExists(story);
+        }
+      });
   });
 
   it('retains the last search term on reload', () => {
     cy.get('#search').clear();
 
-    cy.get('#search').type('redux');
+    cy.get('#search').type('vue');
 
     cy.reload();
 
-    cy.get('#search').should('have.value', 'redux');
-    cy.get('div:contains("Redux")').should('exist');
-    cy.get('div:contains("React")').should('not.exist');
+    cy.get('@stories')
+      .then(stories => {
+        const filteredStories = filterStories(stories.hits, 'vue');
+
+        for(const story of filteredStories) {
+          validateStoryExists(story);
+        }
+      });
   });
 
   it('removes a story from the list upon clicking the Dismiss button', () => {
     cy.get('#search').clear();
 
-    cy.get('div.story:contains("Redux")').within(() => {
+    cy.get('div.story:contains("Immutable")').within(() => {
       cy.get('button').click();
     });
 
-    cy.get('div:contains("Redux")').should('not.exist');
+    cy.get('div:contains("Immutable")').should('not.exist');
   });
 });

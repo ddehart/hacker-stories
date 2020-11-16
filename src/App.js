@@ -1,23 +1,6 @@
 import React from 'react';
 
-const initialStories = [
-  {
-    title: 'React',
-    url: 'https://reactjs.org/',
-    author: 'Jordan Walke',
-    num_comments: 3,
-    points: 4,
-    objectID: 0,
-  },
-  {
-    title: 'Redux',
-    url: 'https://redux.js.org/',
-    author: 'Dan Abramov, Andrew Clark',
-    num_comments: 2,
-    points: 5,
-    objectID: 1,
-  },
-];
+const endpoint = 'https://hn.algolia.com/api/v1/search?query=';
 
 const storiesReducer = (state, action) => {
   switch (action.type) {
@@ -52,14 +35,6 @@ const storiesReducer = (state, action) => {
   }
 };
 
-const getAsyncStories = () =>
-  new Promise(resolve =>
-    setTimeout(
-      () => resolve({ data: { stories: initialStories } }),
-      50
-    )
-  );
-
 /**
  * @param {string} key
  * @param {string} initialState
@@ -90,14 +65,17 @@ const App = () => {
   React.useEffect(() => {
     dispatchStories({ type: 'stories_fetch_init' });
 
-    getAsyncStories()
+    fetch(`${endpoint}react`)
+      .then(response => response.json())
       .then(result => {
         dispatchStories({
           type: 'stories_fetch_success',
-          payload: result.data.stories,
-        });
+          payload: result.hits,
+        })
       })
-      .catch(() => dispatchStories({ type: 'stories_fetch_failure' }));
+      .catch(() =>
+        dispatchStories({ type: 'stories_fetch_failure' })
+      );
   }, []);
 
   const handleRemoveStory = item => {
@@ -130,7 +108,9 @@ const App = () => {
       {stories.isLoading ? (
         <p>Loading ...</p>
       ) : (
+      <div data-testid='stories-list'>
         <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+      </div>
       )}
     </div>
   );

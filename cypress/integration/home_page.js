@@ -52,6 +52,10 @@ describe('The home page', () =>{
     cy.get('#search').should('have.focus');
   });
 
+  it('has a search button', () => {
+    cy.get('button#search-button').should('exist');
+  });
+
   it('has a list of stories based on the initial value in the search box', () => {
     cy.get('@stories')
       .then(stories => {

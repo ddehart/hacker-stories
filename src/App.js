@@ -103,6 +103,10 @@ const App = () => {
         <strong>Search:</strong>
       </InputWithLabel>
 
+      <button id='search-button' type='button'>
+        Submit
+      </button>
+
       <hr/>
 
       {stories.isError && <p>Something went wrong ...</p>}

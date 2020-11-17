@@ -57,6 +57,10 @@ describe('The App', () => {
     expect(searchBox).toHaveFocus();
   });
 
+  test('renders a search button', () => {
+    expect(screen.getByRole('button', {name: 'Submit'})).toBeInTheDocument();
+  });
+
   test('renders a story based on the initial value of the text input', () => {
     const filteredStories = stories.hits.filter(story => story.title.includes('React'));
     const renderedStories = storiesRendered(filteredStories);

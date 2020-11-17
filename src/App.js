@@ -62,9 +62,7 @@ const App = () => {
     }
   );
 
-  React.useEffect(() => {
-    let mounted = true;
-
+  const handleFetchStories = React.useCallback(() => {
     if (!searchTerm) return;
 
     dispatchStories({ type: 'stories_fetch_init' });
@@ -72,20 +70,19 @@ const App = () => {
     fetch(`${endpoint}${searchTerm}`)
       .then(response => response.json())
       .then(result => {
-        if (mounted) {
-          dispatchStories({
-            type: 'stories_fetch_success',
-            payload: result.hits,
-          })
-        }
+        dispatchStories({
+          type: 'stories_fetch_success',
+          payload: result.hits,
+        })
       })
       .catch(() =>
         dispatchStories({ type: 'stories_fetch_failure' })
       );
-
-    return () => { mounted = false };
-
   }, [searchTerm]);
+
+  React.useEffect(() => {
+    handleFetchStories();
+  }, [handleFetchStories]);
 
   const handleRemoveStory = item => {
     dispatchStories({

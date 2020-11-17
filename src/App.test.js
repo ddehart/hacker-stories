@@ -68,11 +68,21 @@ describe('The App', () => {
     expect(renderedStories).toEqual(filteredStories);
   });
 
+  test('enables the button with a value in the text input', () => {
+    expect(screen.getByRole('button', {name: 'Submit'})).toBeEnabled();
+  });
+
   test('renders all stories with no value in the text input', () => {
     userEvent.clear(searchBox);
     const renderedStories = storiesRendered(stories.hits);
 
     expect(renderedStories).toEqual(stories.hits);
+  });
+
+  test('disables the button with no value in the text input', () => {
+    userEvent.clear(searchBox);
+
+    expect(screen.getByRole('button', {name: 'Submit'})).toBeDisabled();
   });
 
   test('renders a Dismiss button next to each story', () => {

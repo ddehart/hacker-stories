@@ -103,7 +103,7 @@ const App = () => {
         <strong>Search:</strong>
       </InputWithLabel>
 
-      <button id='search-button' type='button'>
+      <button id='search-button' type='button' disabled={!searchTerm}>
         Submit
       </button>
 

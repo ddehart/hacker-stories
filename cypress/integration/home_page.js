@@ -67,6 +67,10 @@ describe('The home page', () =>{
       });
   });
 
+  it('enables the search button with a value in the search box', () => {
+    cy.get('button#search-button').should('be.enabled');
+  });
+
   it('lists all stories with no value in the search box', () => {
     cy.get('#search').clear();
 
@@ -76,6 +80,10 @@ describe('The home page', () =>{
           validateStoryExists(story);
         }
       });
+  });
+
+  it('disables the search button with no value in the search box', () => {
+    cy.get('button#search-button').should('be.disabled');
   });
 
   it('has a dismiss button next to each story', () => {

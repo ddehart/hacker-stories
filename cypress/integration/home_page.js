@@ -120,8 +120,6 @@ describe('The home page', () =>{
   });
 
   it('removes a story from the list upon clicking the Dismiss button', () => {
-    cy.get('#search').clear();
-
     cy.get('div.story:contains("simulo")').within(() => {
       cy.get('button').click();
     });

@@ -63,20 +63,29 @@ const App = () => {
   );
 
   React.useEffect(() => {
+    let mounted = true;
+
+    if (!searchTerm) return;
+
     dispatchStories({ type: 'stories_fetch_init' });
 
-    fetch(`${endpoint}react`)
+    fetch(`${endpoint}${searchTerm}`)
       .then(response => response.json())
       .then(result => {
-        dispatchStories({
-          type: 'stories_fetch_success',
-          payload: result.hits,
-        })
+        if (mounted) {
+          dispatchStories({
+            type: 'stories_fetch_success',
+            payload: result.hits,
+          })
+        }
       })
       .catch(() =>
         dispatchStories({ type: 'stories_fetch_failure' })
       );
-  }, []);
+
+    return () => { mounted = false };
+
+  }, [searchTerm]);
 
   const handleRemoveStory = item => {
     dispatchStories({
@@ -88,10 +97,6 @@ const App = () => {
   const handleSearch = event => {
     setSearchTerm(event.target.value);
   };
-
-  const searchedStories = stories.data.filter(story =>
-    story.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div>
@@ -109,7 +114,7 @@ const App = () => {
         <p>Loading ...</p>
       ) : (
       <div data-testid='stories-list'>
-        <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+        <List list={stories.data} onRemoveItem={handleRemoveStory} />
       </div>
       )}
     </div>

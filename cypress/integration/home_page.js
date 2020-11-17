@@ -118,10 +118,10 @@ describe('The home page', () =>{
   it('removes a story from the list upon clicking the Dismiss button', () => {
     cy.get('#search').clear();
 
-    cy.get('div.story:contains("Immutable")').within(() => {
+    cy.get('div.story:contains("simulo")').within(() => {
       cy.get('button').click();
     });
 
-    cy.get('div:contains("Immutable")').should('not.exist');
+    cy.get('div:contains("simulo")').should('not.exist');
   });
 });

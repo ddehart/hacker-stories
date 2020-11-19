@@ -6,13 +6,15 @@ describe('The home page', () =>{
     cy.get('span:contains("' + story.points + '")').should('exist');
   };
 
-  const filterStories = (stories, filter) =>
-    stories.filter(
-      story => story.title.includes(filter)
-    );
+  const validateStoriesExist = (stories) => {
+    for (const story of stories) {
+      validateStoryExists(story);
+    }
+  };
 
   beforeEach(() => {
-    cy.fixture('stories.json').as('stories');
+    cy.fixture('react-stories.json').as('react-stories');
+    cy.fixture('vue-stories.json').as('vue-stories');
   });
 
   it('loads', () => {
@@ -27,7 +29,7 @@ describe('The home page', () =>{
     cy.get('p:contains("Something went wrong ...")').should('not.exist');
   });
 
-  it('has the React App title', () => {
+  it('has the Hacker Stories title', () => {
     cy.title().should('equal', 'Hacker Stories');
   });
 
@@ -52,42 +54,20 @@ describe('The home page', () =>{
     cy.get('#search').should('have.focus');
   });
 
-  it('has a search button', () => {
+  it('has an enabled search button', () => {
     cy.get('button#search-button').should('exist');
-  });
-
-  it('has a list of stories based on the initial value in the search box', () => {
-    cy.get('@stories')
-      .then(stories => {
-        const filteredStories = filterStories(stories.hits, 'React');
-
-        for(const story of filteredStories) {
-          validateStoryExists(story);
-        }
-      });
-  });
-
-  it('enables the search button with a value in the search box', () => {
     cy.get('button#search-button').should('be.enabled');
   });
 
-  it('lists all stories with no value in the search box', () => {
-    cy.get('#search').clear();
-
-    cy.get('@stories')
+  it('has a list of stories based on the initial value in the search box', () => {
+    cy.get('@react-stories')
       .then(stories => {
-        for(const story of stories.hits) {
-          validateStoryExists(story);
-        }
+        validateStoriesExist(stories.hits);
       });
   });
 
-  it('disables the search button with no value in the search box', () => {
-    cy.get('button#search-button').should('be.disabled');
-  });
-
   it('has a dismiss button next to each story', () => {
-    cy.get('@stories').then(stories => {
+    cy.get('@react-stories').then(stories => {
       for(const story of stories.hits) {
         cy.get('div.story:contains("' + story.title + '")').within(() => {
           cy.get('button').should('have.text', 'Dismiss');
@@ -96,42 +76,41 @@ describe('The home page', () =>{
     });
   });
 
-  it('filters the list of stories given text in the search textbox', () => {
-    cy.get('#search').clear();
-    cy.get('#search').type('redux');
-
-    cy.get('@stories')
-      .then(stories => {
-        const filteredStories = filterStories(stories.hits, 'redux');
-
-        for(const story of filteredStories) {
-          validateStoryExists(story);
-        }
-      });
-  });
-
-  it('retains the last search term on reload', () => {
-    cy.get('#search').clear();
-
-    cy.get('#search').type('vue');
-
-    cy.reload();
-
-    cy.get('@stories')
-      .then(stories => {
-        const filteredStories = filterStories(stories.hits, 'vue');
-
-        for(const story of filteredStories) {
-          validateStoryExists(story);
-        }
-      });
-  });
-
   it('removes a story from the list upon clicking the Dismiss button', () => {
-    cy.get('div.story:contains("simulo")').within(() => {
+    cy.get('div.story:contains("Relicensing React")').within(() => {
       cy.get('button').click();
     });
 
     cy.get('div:contains("simulo")').should('not.exist');
+  });
+
+  it('disables the search button with no value in the search box', () => {
+    cy.get('#search').clear();
+    cy.get('button#search-button').should('be.disabled');
+  });
+
+  it('displays different stories after submitting a new search term', () => {
+    cy.get('#search').clear();
+    cy.get('#search').type('vue');
+
+    cy.get('#search-button').click();
+
+    cy.get('@vue-stories')
+      .then(stories => {
+        validateStoriesExist(stories.hits);
+      });
+  });
+
+  it('retains the last search term on reload', () => {
+    localStorage.setItem('search', 'vue');
+
+    cy.reload();
+
+    cy.get('#search').should('have.value', 'vue');
+
+    cy.get('@vue-stories')
+      .then(stories => {
+        validateStoriesExist(stories.hits);
+      });
   });
 });

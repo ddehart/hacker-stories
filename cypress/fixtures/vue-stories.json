@@ -1,0 +1,890 @@
+{
+  "hits": [
+    {
+      "created_at": "2020-09-18T15:50:42.000Z",
+      "title": "Vue.js 3",
+      "url": "https://github.com/vuejs/vue-next/releases/tag/v3.0.0",
+      "author": "simulo",
+      "points": 768,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 305,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1600444242,
+      "_tags": [
+        "story",
+        "author_simulo",
+        "story_24518295"
+      ],
+      "objectID": "24518295",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em>.js 3",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://github.com/<em>vue</em>js/<em>vue</em>-next/releases/tag/v3.0.0",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "simulo",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2017-08-19T10:43:04.000Z",
+      "title": "Vue.js vs. React",
+      "url": "https://vuejs.org/v2/guide/comparison.html#React",
+      "author": "fanf2",
+      "points": 732,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 471,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1503139384,
+      "relevancy_score": 7608,
+      "_tags": [
+        "story",
+        "author_fanf2",
+        "story_15052691"
+      ],
+      "objectID": "15052691",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em>.js vs. React",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://<em>vue</em>js.org/v2/guide/comparison.html#React",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "fanf2",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2016-10-21T03:21:07.000Z",
+      "title": "Why we chose Vue.js",
+      "url": "https://about.gitlab.com/2016/10/20/why-we-chose-vue/",
+      "author": "rmason",
+      "points": 637,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 271,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1477020067,
+      "relevancy_score": 7030,
+      "_tags": [
+        "story",
+        "author_rmason",
+        "story_12757946"
+      ],
+      "objectID": "12757946",
+      "_highlightResult": {
+        "title": {
+          "value": "Why we chose <em>Vue</em>.js",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://about.gitlab.com/2016/10/20/why-we-chose-<em>vue</em>/",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "rmason",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2018-07-05T20:12:50.000Z",
+      "title": "Vue.js: the good, the meh, and the ugly",
+      "url": "https://medium.com/@Pier/vue-js-the-good-the-meh-and-the-ugly-82800bbe6684",
+      "author": "prostoalex",
+      "points": 621,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 374,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1530821570,
+      "relevancy_score": 8226,
+      "_tags": [
+        "story",
+        "author_prostoalex",
+        "story_17466400"
+      ],
+      "objectID": "17466400",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em>.js: the good, the meh, and the ugly",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://medium.com/@Pier/<em>vue</em>-js-the-good-the-meh-and-the-ugly-82800bbe6684",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "prostoalex",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2018-06-22T12:38:34.000Z",
+      "title": "Show HN: Material Dashboard – Free Admin for Bootstrap 4, React, Angular, Vue.js",
+      "url": "https://github.com/creativetimofficial/material-dashboard",
+      "author": "axelut",
+      "points": 435,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 149,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1529671114,
+      "relevancy_score": 8199,
+      "_tags": [
+        "story",
+        "author_axelut",
+        "story_17373465",
+        "show_hn"
+      ],
+      "objectID": "17373465",
+      "_highlightResult": {
+        "title": {
+          "value": "Show HN: Material Dashboard – Free Admin for Bootstrap 4, React, Angular, <em>Vue</em>.js",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://github.com/creativetimofficial/material-dashboard",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        },
+        "author": {
+          "value": "axelut",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2020-05-02T12:01:44.000Z",
+      "title": "Building a patient monitoring system with Go and Vue in 3 days",
+      "url": "https://kasvith.me/posts/how-we-created-a-realtime-patient-monitoring-system-with-go-and-vue/",
+      "author": "astdb",
+      "points": 436,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 139,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1588420904,
+      "_tags": [
+        "story",
+        "author_astdb",
+        "story_23051242"
+      ],
+      "objectID": "23051242",
+      "_highlightResult": {
+        "title": {
+          "value": "Building a patient monitoring system with Go and <em>Vue</em> in 3 days",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://kasvith.me/posts/how-we-created-a-realtime-patient-monitoring-system-with-go-and-<em>vue</em>/",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "astdb",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2018-06-13T00:52:41.000Z",
+      "title": "Vue Native",
+      "url": "https://vue-native.io",
+      "author": "tomcam",
+      "points": 429,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 203,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1528851161,
+      "relevancy_score": 8186,
+      "_tags": [
+        "story",
+        "author_tomcam",
+        "story_17299374"
+      ],
+      "objectID": "17299374",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em> Native",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://<em>vue</em>-native.io",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "tomcam",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2017-11-10T17:27:36.000Z",
+      "title": "How we do Vue at GitLab: one year later",
+      "url": "https://about.gitlab.com/2017/11/09/gitlab-vue-one-year-later/",
+      "author": "unnawut",
+      "points": 385,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 196,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1510334856,
+      "relevancy_score": 7769,
+      "_tags": [
+        "story",
+        "author_unnawut",
+        "story_15671400"
+      ],
+      "objectID": "15671400",
+      "_highlightResult": {
+        "title": {
+          "value": "How we do <em>Vue</em> at GitLab: one year later",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://about.gitlab.com/2017/11/09/gitlab-<em>vue</em>-one-year-later/",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "unnawut",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2016-12-11T15:02:07.000Z",
+      "title": "Why we chose Vue.js over React",
+      "url": "http://pixeljets.com/blog/why-we-chose-vuejs-over-react",
+      "author": "jitter",
+      "points": 377,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 249,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1481468527,
+      "relevancy_score": 7124,
+      "_tags": [
+        "story",
+        "author_jetter",
+        "story_13151317"
+      ],
+      "objectID": "13151317",
+      "_highlightResult": {
+        "title": {
+          "value": "Why we chose <em>Vue</em>.js over React",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "http://pixeljets.com/blog/why-we-chose-<em>vue</em>js-over-react",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "jetter",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2015-10-27T02:08:33.000Z",
+      "title": "Vue.js 1.0.0",
+      "url": "http://vuejs.org/2015/10/26/1.0.0-release/",
+      "author": "uptown",
+      "points": 376,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 88,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1445911713,
+      "relevancy_score": 6345,
+      "_tags": [
+        "story",
+        "author_uptown",
+        "story_10455812"
+      ],
+      "objectID": "10455812",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em>.js 1.0.0",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "http://<em>vue</em>js.org/2015/10/26/1.0.0-release/",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "uptown",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2017-02-07T04:10:28.000Z",
+      "title": "Our long term plan to make GitLab as fast as possible with Vue and Webpack",
+      "url": "https://about.gitlab.com/2017/02/06/vue-big-plan/",
+      "author": "miqkt",
+      "points": 373,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 290,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1486440628,
+      "relevancy_score": 7245,
+      "_tags": [
+        "story",
+        "author_miqkt",
+        "story_13586940"
+      ],
+      "objectID": "13586940",
+      "_highlightResult": {
+        "title": {
+          "value": "Our long term plan to make GitLab as fast as possible with <em>Vue</em> and Webpack",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://about.gitlab.com/2017/02/06/<em>vue</em>-big-plan/",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "miqkt",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2017-01-25T11:42:12.000Z",
+      "title": "Element – A Vue 2.0-based component library for developers, designers and PMs",
+      "url": "http://element.eleme.io/",
+      "author": "Dowwie",
+      "points": 337,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 140,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1485344532,
+      "relevancy_score": 7218,
+      "_tags": [
+        "story",
+        "author_Dowwie",
+        "story_13480599"
+      ],
+      "objectID": "13480599",
+      "_highlightResult": {
+        "title": {
+          "value": "Element – A <em>Vue</em> 2.0-based component library for developers, designers and PMs",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "http://element.eleme.io/",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        },
+        "author": {
+          "value": "Dowwie",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2019-03-18T21:38:29.000Z",
+      "title": "How we do Vue: one year later (2017)",
+      "url": "https://about.gitlab.com/2017/11/09/gitlab-vue-one-year-later/",
+      "author": "NicoJuicy",
+      "points": 308,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 157,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1552945109,
+      "relevancy_score": 8723,
+      "_tags": [
+        "story",
+        "author_NicoJuicy",
+        "story_19425589"
+      ],
+      "objectID": "19425589",
+      "_highlightResult": {
+        "title": {
+          "value": "How we do <em>Vue</em>: one year later (2017)",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://about.gitlab.com/2017/11/09/gitlab-<em>vue</em>-one-year-later/",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "NicoJuicy",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2020-02-17T14:31:51.000Z",
+      "title": "Vue.js: The Documentary (Trailer) [video]",
+      "url": "https://www.youtube.com/watch?v=2EmYw-O-WLI",
+      "author": "nailer",
+      "points": 309,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 98,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1581949911,
+      "_tags": [
+        "story",
+        "author_nailer",
+        "story_22347911"
+      ],
+      "objectID": "22347911",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em>.js: The Documentary (Trailer) [video]",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://www.youtube.com/watch?v=2EmYw-O-WLI",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        },
+        "author": {
+          "value": "nailer",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2018-07-29T07:14:09.000Z",
+      "title": "I created the exact same app in React and Vue",
+      "url": "https://medium.com/javascript-in-plain-english/i-created-the-exact-same-app-in-react-and-vue-here-are-the-differences-e9a1ae8077fd",
+      "author": "techbio",
+      "points": 301,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 180,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1532848449,
+      "relevancy_score": 8266,
+      "_tags": [
+        "story",
+        "author_techbio",
+        "story_17636940"
+      ],
+      "objectID": "17636940",
+      "_highlightResult": {
+        "title": {
+          "value": "I created the exact same app in React and <em>Vue</em>",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://medium.com/javascript-in-plain-english/i-created-the-exact-same-app-in-react-and-<em>vue</em>-here-are-the-differences-e9a1ae8077fd",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "techbio",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2018-11-17T09:25:59.000Z",
+      "title": "Vue 3.0 Updates [slides]",
+      "url": "https://docs.google.com/presentation/d/1yhPGyhQrJcpJI2ZFvBme3pGKaGNiLi709c37svivv0o/preview?slide=id.p",
+      "author": "mxstbr",
+      "points": 292,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 123,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1542446759,
+      "relevancy_score": 8481,
+      "_tags": [
+        "story",
+        "author_mxstbr",
+        "story_18474745"
+      ],
+      "objectID": "18474745",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em> 3.0 Updates [slides]",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://docs.google.com/presentation/d/1yhPGyhQrJcpJI2ZFvBme3pGKaGNiLi709c37svivv0o/preview?slide=id.p",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        },
+        "author": {
+          "value": "mxstbr",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2017-12-24T14:36:10.000Z",
+      "title": "Vue.js vs. React: what happened in 2017",
+      "url": "http://pixeljets.com/blog/vue-js-vs-react-what-to-expect-in-2018/",
+      "author": "jetter",
+      "points": 285,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 167,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1514126170,
+      "relevancy_score": 7849,
+      "_tags": [
+        "story",
+        "author_jetter",
+        "story_15999688"
+      ],
+      "objectID": "15999688",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em>.js vs. React: what happened in 2017",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "http://pixeljets.com/blog/<em>vue</em>-js-vs-react-what-to-expect-in-2018/",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "author": {
+          "value": "jetter",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2017-05-07T11:10:26.000Z",
+      "title": "Vue HN 2.0",
+      "url": "https://hnews.xyz/top",
+      "author": "galfarragem",
+      "points": 277,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 83,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1494155426,
+      "relevancy_score": 7405,
+      "_tags": [
+        "story",
+        "author_galfarragem",
+        "story_14284877"
+      ],
+      "objectID": "14284877",
+      "_highlightResult": {
+        "title": {
+          "value": "<em>Vue</em> HN 2.0",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://hnews.xyz/top",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        },
+        "author": {
+          "value": "galfarragem",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2019-05-25T11:48:01.000Z",
+      "title": "Show HN: A renderless and extendable rich-text editor for Vue.js",
+      "url": "https://github.com/scrumpy/tiptap",
+      "author": "hanspagel",
+      "points": 278,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 74,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1558784881,
+      "relevancy_score": 8844,
+      "_tags": [
+        "story",
+        "author_hanspagel",
+        "story_20008466",
+        "show_hn"
+      ],
+      "objectID": "20008466",
+      "_highlightResult": {
+        "title": {
+          "value": "Show HN: A renderless and extendable rich-text editor for <em>Vue</em>.js",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "https://github.com/scrumpy/tiptap",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        },
+        "author": {
+          "value": "hanspagel",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    },
+    {
+      "created_at": "2017-08-20T07:33:41.000Z",
+      "title": "Marko – An isomorphic UI framework similar to Vue",
+      "url": "http://markojs.com",
+      "author": "jsnathan",
+      "points": 276,
+      "story_text": null,
+      "comment_text": null,
+      "num_comments": 148,
+      "story_id": null,
+      "story_title": null,
+      "story_url": null,
+      "parent_id": null,
+      "created_at_i": 1503214421,
+      "relevancy_score": 7607,
+      "_tags": [
+        "story",
+        "author_jsnathan",
+        "story_15057371"
+      ],
+      "objectID": "15057371",
+      "_highlightResult": {
+        "title": {
+          "value": "Marko – An isomorphic UI framework similar to <em>Vue</em>",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "vue"
+          ]
+        },
+        "url": {
+          "value": "http://markojs.com",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        },
+        "author": {
+          "value": "jsnathan",
+          "matchLevel": "none",
+          "matchedWords": [ ]
+        }
+      }
+    }
+  ],
+  "nbHits": 17208,
+  "page": 0,
+  "nbPages": 50,
+  "hitsPerPage": 20,
+  "exhaustiveNbHits": false,
+  "query": "vue",
+  "params": "advancedSyntax=true&analytics=true&analyticsTags=backend&query=vue",
+  "processingTimeMS": 6
+}

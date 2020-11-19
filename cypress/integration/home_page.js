@@ -76,16 +76,20 @@ describe('The home page', () =>{
        * @property {array} stories.hits
        */
       for(const story of stories.hits) {
-        cy.get('div.story:contains("' + story.title + '")').within(() => {
-          cy.get('button').should('have.text', 'Dismiss');
+        cy.get('div[data-testid=stories-list]').within(() => {
+          cy.get('div:contains("' + story.title + '")').within(() => {
+            cy.get('button').should('exist');
+          });
         });
       }
     });
   });
 
   it('removes a story from the list upon clicking the Dismiss button', () => {
-    cy.get('div.story:contains("Relicensing React")').within(() => {
-      cy.get('button').click();
+    cy.get('div[data-testid=stories-list]').within(() => {
+      cy.get('div:contains("Relicensing React")').within(() => {
+        cy.get('button').click();
+      });
     });
 
     cy.get('div:contains("simulo")').should('not.exist');

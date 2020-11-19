@@ -76,20 +76,19 @@ const App = () => {
     setUrl(`${endpoint}${searchTerm}`);
   };
 
-  const handleFetchStories = React.useCallback(() => {
+  const handleFetchStories = React.useCallback(async () => {
     dispatchStories({ type: 'stories_fetch_init' });
 
-    axios
-      .get(url)
-      .then(result => {
-        dispatchStories({
-          type: 'stories_fetch_success',
-          payload: result.data.hits,
-        })
+    try {
+      const result = await axios.get(url);
+
+      dispatchStories({
+        type: 'stories_fetch_success',
+        payload: result.data.hits,
       })
-      .catch(() =>
-        dispatchStories({ type: 'stories_fetch_failure' })
-      );
+    } catch {
+      dispatchStories({ type: 'stories_fetch_failure' });
+    }
   }, [url]);
 
   React.useEffect(() => {

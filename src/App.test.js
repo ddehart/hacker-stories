@@ -1,9 +1,10 @@
+import axios from 'axios';
 import React from 'react';
-import {act, render, screen, waitFor, within} from '@testing-library/react';
+import {render, screen, waitFor, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
-jest.spyOn(global, 'fetch');
+jest.mock('axios');
 
 describe('The App', () => {
   let reactStories = require('../cypress/fixtures/react-stories.json');
@@ -14,9 +15,9 @@ describe('The App', () => {
     stories.filter(story => (
         screen.queryByText(story.title) &&
         screen.queryByText(story.title).getAttribute('href') === story.url &&
-        screen.queryByText(story.author) &&
-        screen.queryByText(story.num_comments.toString()) &&
-        screen.queryByText(story.points.toString())
+        screen.queryAllByText(story.author) &&
+        screen.queryAllByText(story.num_comments.toString()) &&
+        screen.queryAllByText(story.points.toString())
       )
     )
   );
@@ -25,15 +26,14 @@ describe('The App', () => {
     new Promise(resolve =>
       setTimeout(
         () => resolve({
-          ok: true,
-          json: () => json
+          data: json
         }), delay
       )
     );
 
   describe('given a data loading delay', () => {
     beforeEach( () => {
-      global.fetch.mockImplementationOnce(() =>
+      axios.get.mockImplementationOnce(() =>
         promiseWithDelay(reactStories, 50)
       );
 
@@ -51,7 +51,7 @@ describe('The App', () => {
 
   describe('given a data loading error', () => {
     beforeEach(async () => {
-      global.fetch.mockImplementationOnce(() => {
+      axios.get.mockImplementationOnce(() => {
         return Promise.reject();
       });
 
@@ -65,7 +65,7 @@ describe('The App', () => {
 
   describe('given a response with React data', () => {
     beforeEach(async () => {
-      global.fetch.mockImplementationOnce(() =>
+      axios.get.mockImplementationOnce(() =>
         promiseWithDelay(reactStories, 0)
       );
 
@@ -127,7 +127,7 @@ describe('The App', () => {
 
   describe('given a response with Vue data', () => {
     beforeEach(async () => {
-      global.fetch.mockImplementationOnce(() =>
+      axios.get.mockImplementationOnce(() =>
         promiseWithDelay(vueStories, 0)
       );
 

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 
 const endpoint = 'https://hn.algolia.com/api/v1/search?query=';
@@ -78,12 +79,12 @@ const App = () => {
   const handleFetchStories = React.useCallback(() => {
     dispatchStories({ type: 'stories_fetch_init' });
 
-    fetch(url)
-      .then(response => response.json())
+    axios
+      .get(url)
       .then(result => {
         dispatchStories({
           type: 'stories_fetch_success',
-          payload: result.hits,
+          payload: result.data.hits,
         })
       })
       .catch(() =>

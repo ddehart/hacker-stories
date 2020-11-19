@@ -6,12 +6,18 @@ describe('The home page', () =>{
     cy.get('span:contains("' + story.points + '")').should('exist');
   };
 
-  const validateStoriesExist = (stories) => {
-    for (const story of stories) {
-      validateStoryExists(story);
-    }
+  const validateStoriesExist = (fixture) => {
+    cy.get(fixture)
+      .then(stories => {
+        /**
+         * @property {object} stories
+         * @property {array} stories.hits
+         */
+        for (const story of stories.hits) {
+          validateStoryExists(story);
+        }
+      });
   };
-
   beforeEach(() => {
     cy.fixture('react-stories.json').as('react-stories');
     cy.fixture('vue-stories.json').as('vue-stories');
@@ -60,14 +66,15 @@ describe('The home page', () =>{
   });
 
   it('has a list of stories based on the initial value in the search box', () => {
-    cy.get('@react-stories')
-      .then(stories => {
-        validateStoriesExist(stories.hits);
-      });
+    validateStoriesExist('@react-stories');
   });
 
   it('has a dismiss button next to each story', () => {
     cy.get('@react-stories').then(stories => {
+      /**
+       * @property {object} stories
+       * @property {array} stories.hits
+       */
       for(const story of stories.hits) {
         cy.get('div.story:contains("' + story.title + '")').within(() => {
           cy.get('button').should('have.text', 'Dismiss');
@@ -95,10 +102,7 @@ describe('The home page', () =>{
 
     cy.get('#search-button').click();
 
-    cy.get('@vue-stories')
-      .then(stories => {
-        validateStoriesExist(stories.hits);
-      });
+    validateStoriesExist('@vue-stories');
   });
 
   it('retains the last search term on reload', () => {
@@ -108,9 +112,6 @@ describe('The home page', () =>{
 
     cy.get('#search').should('have.value', 'vue');
 
-    cy.get('@vue-stories')
-      .then(stories => {
-        validateStoriesExist(stories.hits);
-      });
+    validateStoriesExist('@vue-stories');
   });
 });

@@ -12,6 +12,14 @@ describe('The App', () => {
   let searchBox;
 
   const storiesRendered = (stories) => (
+    /**
+     * @property {object} story
+     * @property {string} story.title
+     * @property {string} story.url
+     * @property {string} story.author
+     * @property {number} story.num_comments
+     * @property {number} story.points
+     */
     stories.filter(story => (
         screen.queryByText(story.title) &&
         screen.queryByText(story.title).getAttribute('href') === story.url &&
@@ -31,16 +39,43 @@ describe('The App', () => {
       )
     );
 
+  const mockAPI = (response, json={}, delay=0) => {
+    switch (response) {
+      case 'resolve':
+        axios.get.mockImplementationOnce(() =>
+          promiseWithDelay(json, delay)
+        );
+        break;
+
+      case 'reject':
+        axios.get.mockImplementationOnce(() =>{
+          return Promise.reject();
+        });
+        break;
+
+      default:
+        throw new Error();
+    }
+  };
+
+  const setUpListRender = async (fixture) => {
+    mockAPI('resolve', fixture);
+
+    render(<App />);
+
+    searchBox = screen.getByRole('textbox', {name: 'Search:'});
+
+    await waitFor(() =>
+      expect(document.querySelector('div.story')).toBeInTheDocument()
+    );
+  };
+
   describe('given a data loading delay', () => {
-    beforeEach( () => {
-      axios.get.mockImplementationOnce(() =>
-        promiseWithDelay(reactStories, 50)
-      );
+    test('renders a loading message and then a list of stories', async () => {
+      mockAPI('resolve', reactStories, 50);
 
       render(<App />);
-    });
 
-    test('renders a loading message', async () => {
       expect(screen.getByText('Loading ...')).toBeInTheDocument();
 
       await waitFor(() => {
@@ -50,32 +85,20 @@ describe('The App', () => {
   });
 
   describe('given a data loading error', () => {
-    beforeEach(async () => {
-      axios.get.mockImplementationOnce(() => {
-        return Promise.reject();
+    test('renders an error message after loading',  async () => {
+      mockAPI('reject');
+
+      render(<App />);
+
+      await waitFor(() => {
+        expect(screen.queryByText('Something went wrong ...')).toBeInTheDocument();
       });
-
-      await waitFor(() => render(<App />));
-    });
-
-    test('renders an error message', () => {
-      expect(screen.getByText('Something went wrong ...')).toBeInTheDocument();
     });
   });
 
   describe('given a response with React data', () => {
     beforeEach(async () => {
-      axios.get.mockImplementationOnce(() =>
-        promiseWithDelay(reactStories, 0)
-      );
-
-      render(<App />);
-
-      searchBox = screen.getByRole('textbox', {name: 'Search:'});
-
-      await waitFor(() =>
-        expect(document.querySelector('div.story')).toBeInTheDocument()
-      );
+      await setUpListRender(reactStories);
     });
 
     test('renders Hacker Stories heading', () => {
@@ -97,9 +120,7 @@ describe('The App', () => {
     });
 
     test('renders stories based on the initial value of the text input', () => {
-      const renderedStories = storiesRendered(reactStories.hits);
-
-      expect(renderedStories).toEqual(reactStories.hits);
+      expect(storiesRendered(reactStories.hits)).toEqual(reactStories.hits);
     });
 
     test('renders a Dismiss button next to each story', () => {
@@ -112,10 +133,10 @@ describe('The App', () => {
     });
 
     test('removes an item from the list upon clicking the Dismiss button', () => {
-      const dismissDiv = screen.getByText('2280').parentElement;
+      const dismissDiv = screen.getByText('dwwoelfel').parentElement;
       within(dismissDiv).getByRole('button', {name: 'Dismiss'}).click();
 
-      expect(screen.queryByText('Redux')).not.toBeInTheDocument();
+      expect(screen.queryByText('dwwoelfel')).not.toBeInTheDocument();
     });
 
     test('disables the button with no value in the text input', () => {
@@ -123,30 +144,25 @@ describe('The App', () => {
 
       expect(screen.getByRole('button', {name: 'Submit'})).toBeDisabled();
     });
-  });
 
-  describe('given a response with Vue data', () => {
-    beforeEach(async () => {
-      axios.get.mockImplementationOnce(() =>
-        promiseWithDelay(vueStories, 0)
-      );
+    test('renders a list of stories based on the search term submitted', async () => {
+      mockAPI('resolve', vueStories);
 
-      render(<App />);
-
-      searchBox = screen.getByRole('textbox', {name: 'Search:'});
+      userEvent.clear(searchBox);
+      await userEvent.type(searchBox, 'vue');
+      userEvent.click(screen.getByRole('button', {name: 'Submit'}));
 
       await waitFor(() =>
         expect(document.querySelector('div.story')).toBeInTheDocument()
       );
+
+      expect(storiesRendered(vueStories.hits)).toEqual(vueStories.hits);
     });
+  });
 
-    test('renders a list of stories based on the search term submitted', () => {
-      userEvent.clear(searchBox);
-      userEvent.type(searchBox, 'vue');
-
-      const renderedStories = storiesRendered(vueStories.hits);
-
-      expect(renderedStories).toEqual(vueStories.hits);
+  describe('given a response with Vue data', () => {
+    beforeEach(async () => {
+      await setUpListRender(vueStories);
     });
 
     test('sets the search term in local storage', () => {

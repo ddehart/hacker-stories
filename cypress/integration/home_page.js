@@ -1,9 +1,12 @@
 describe('The home page', () =>{
   const validateStoryExists = (story) => {
-    cy.get('a:contains("' + story.title + '")').should('have.attr', 'href', story.url);
-    cy.get('span:contains("' + story.author + '")').should('exist');
-    cy.get('span:contains("' + story.num_comments + '")').should('exist');
-    cy.get('span:contains("' + story.points + '")').should('exist');
+    cy.findByRole('link', {name: story.title}).parent().parent().within(() => {
+      cy.findByRole('link', {name: story.title}).should('have.attr', 'href', story.url);
+      cy.findByText(story.author).should('exist');
+      cy.findByText(story.num_comments.toString()).should('exist');
+      cy.findByText(story.points.toString()).should('exist');
+      cy.findByRole('button', {name: 'Dismiss'}).should('exist');
+    });
   };
 
   const validateStoriesExist = (fixture) => {
@@ -28,11 +31,11 @@ describe('The home page', () =>{
   });
 
   it('has a loading indicator before the list has loaded', () => {
-    cy.get('p:contains("Loading ...")').should('exist');
+    cy.findByText('Loading ...').should('exist');
   });
 
   it('does not display an error', () => {
-    cy.get('p:contains("Something went wrong ...")').should('not.exist');
+    cy.findByText('Something went wrong ...').should('not.exist');
   });
 
   it('has the Hacker Stories title', () => {
@@ -40,71 +43,47 @@ describe('The home page', () =>{
   });
 
   it('has the Hacker Stories header', () => {
-    cy.get('h1')
-      .should('have.text', 'Hacker Stories')
-  });
-
-  it('has a search label', () => {
-    cy.get('label')
-      .should('contain.text', 'Search')
-      .and('have.attr', 'for', 'search');
+    cy.findByRole('heading', {level: 1}).should('have.text', 'Hacker Stories');
   });
 
   it('has a search box with an initial value', () => {
-    cy.get('#search')
+    cy.findByLabelText('Search:')
       .should('have.attr', 'type', 'text')
       .and('have.value', 'React');
   });
 
   it('is immediately focused on the search box', () => {
-    cy.get('#search').should('have.focus');
+    cy.findByLabelText('Search:').should('have.focus');
   });
 
   it('has an enabled search button', () => {
-    cy.get('button#search-button').should('exist');
-    cy.get('button#search-button').should('be.enabled');
+    cy.findByRole('button', {name: 'Submit'})
+      .should('exist')
+      .and('be.enabled');
   });
 
   it('has a list of stories based on the initial value in the search box', () => {
     validateStoriesExist('@react-stories');
   });
 
-  it('has a dismiss button next to each story', () => {
-    cy.get('@react-stories').then(stories => {
-      /**
-       * @property {object} stories
-       * @property {array} stories.hits
-       */
-      for(const story of stories.hits) {
-        cy.get('div[data-testid=stories-list]').within(() => {
-          cy.get('div:contains("' + story.title + '")').within(() => {
-            cy.get('button').should('exist');
-          });
-        });
-      }
-    });
-  });
-
   it('removes a story from the list upon clicking the Dismiss button', () => {
-    cy.get('div[data-testid=stories-list]').within(() => {
-      cy.get('div:contains("Relicensing React")').within(() => {
-        cy.get('button').click();
-      });
+    cy.findByRole('link', {name: 'Relicensing React, Jest, Flow, and Immutable.js'})
+      .parent().parent().within(() => {
+        cy.findByRole('button', {name: 'Dismiss'}).click();
     });
 
-    cy.get('div:contains("simulo")').should('not.exist');
+    cy.findByRole('link', {name: 'Relicensing React, Jest, Flow, and Immutable.js'}).should('not.exist');
   });
 
   it('disables the search button with no value in the search box', () => {
-    cy.get('#search').clear();
-    cy.get('button#search-button').should('be.disabled');
+    cy.findByLabelText('Search:').clear()
+    cy.findByRole('button', {name: 'Submit'}).should('be.disabled');
   });
 
   it('displays different stories after submitting a new search term', () => {
-    cy.get('#search').clear();
-    cy.get('#search').type('vue');
-
-    cy.get('#search-button').click();
+    cy.findByLabelText('Search:').clear();
+    cy.findByLabelText('Search:').type('vue');
+    cy.findByRole('button', {name: 'Submit'}).click();
 
     validateStoriesExist('@vue-stories');
   });
@@ -114,7 +93,7 @@ describe('The home page', () =>{
 
     cy.reload();
 
-    cy.get('#search').should('have.value', 'vue');
+    cy.findByLabelText('Search:').should('have.value', 'vue');
 
     validateStoriesExist('@vue-stories');
   });

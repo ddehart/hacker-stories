@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './App.module.css';
 
-import Item from './components/item';
+import List from './components/list';
 
 const endpoint = 'https://hn.algolia.com/api/v1/search?query=';
 
@@ -166,10 +166,5 @@ const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, ch
     </>
   );
 };
-
-const List = ({ list, onRemoveItem }) =>
-  list.map(item =>
-    <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
-  );
 
 export default App;

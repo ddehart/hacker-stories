@@ -1,0 +1,30 @@
+.story {
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+}
+
+.story > span {
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.button {
+    background: transparent;
+    border: 1px solid #171212;
+    padding: 5px;
+    cursor: pointer;
+
+    transition: all 0.1s ease-in;
+}
+
+.button:hover {
+    background: #171212;
+}
+
+.button:hover > svg > g {
+    fill: #ffffff;
+    stroke: #ffffff;
+}

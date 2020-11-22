@@ -3,6 +3,7 @@ import React from 'react';
 
 import styles from './App.module.css';
 
+import Input from './components/input';
 import List from './components/list';
 
 const endpoint = 'https://hn.algolia.com/api/v1/search?query=';
@@ -131,40 +132,14 @@ const App = () => {
 
 const SearchForm = ({searchTerm, onSearchInput, onSearchSubmit}) => (
   <form onSubmit={onSearchSubmit} className={styles.searchForm}>
-    <InputWithLabel id={'search'} value={searchTerm} isFocused onInputChange={onSearchInput}>
+    <Input id={'search'} value={searchTerm} isFocused onInputChange={onSearchInput}>
       <strong>Search:</strong>
-    </InputWithLabel>
+    </Input>
 
     <button id='search-button' type='submit' disabled={!searchTerm} className={`${styles.button} ${styles.buttonLarge}`}>
       Submit
     </button>
   </form>
 );
-
-const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, children }) => {
-  const inputRef = React.useRef();
-
-  React.useEffect(() => {
-    if (isFocused) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
-  return (
-    <>
-      <label htmlFor={id} className={styles.label}>{children}</label>
-      <input
-        ref={inputRef}
-        id={id}
-        type={type}
-        name='story-search'
-        autoComplete='story-search'
-        value={value}
-        onChange={onInputChange}
-        className={styles.input}
-      />
-    </>
-  );
-};
 
 export default App;

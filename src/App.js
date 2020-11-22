@@ -3,8 +3,8 @@ import React from 'react';
 
 import styles from './App.module.css';
 
-import Input from './components/input';
 import List from './components/list';
+import Search from './components/search';
 
 const endpoint = 'https://hn.algolia.com/api/v1/search?query=';
 
@@ -113,7 +113,7 @@ const App = () => {
     <div className={styles.container}>
       <h1 className={styles.headlinePrimary}>Hacker Stories</h1>
 
-      <SearchForm searchTerm={searchTerm} onSearchInput={handleSearchInput} onSearchSubmit={handleSearchSubmit}/>
+      <Search searchTerm={searchTerm} onSearchInput={handleSearchInput} onSearchSubmit={handleSearchSubmit}/>
 
       <hr/>
 
@@ -129,17 +129,5 @@ const App = () => {
     </div>
   );
 };
-
-const SearchForm = ({searchTerm, onSearchInput, onSearchSubmit}) => (
-  <form onSubmit={onSearchSubmit} className={styles.searchForm}>
-    <Input id={'search'} value={searchTerm} isFocused onInputChange={onSearchInput}>
-      <strong>Search:</strong>
-    </Input>
-
-    <button id='search-button' type='submit' disabled={!searchTerm} className={`${styles.button} ${styles.buttonLarge}`}>
-      Submit
-    </button>
-  </form>
-);
 
 export default App;

@@ -1,4 +1,22 @@
+import { sortBy } from 'lodash';
+
 describe('The home page', () =>{
+  const renderedStoryArray = () => {
+    const renderedStories = [];
+
+    cy.findByTestId('list-items').children().each(item => {
+      const spans = item.children();
+      renderedStories.push({
+        title: spans[0].innerText,
+        author: spans[1].innerText,
+        comments: spans[2].innerText,
+        points: spans[3].innerText,
+      })
+    });
+
+    return renderedStories;
+  };
+
   const validateStoryExists = (story) => {
     cy.findByRole('link', {name: story.title}).parent().parent().within(() => {
       cy.findByRole('link', {name: story.title}).should('have.attr', 'href', story.url);
@@ -62,8 +80,55 @@ describe('The home page', () =>{
       .and('be.enabled');
   });
 
+  it('has column headings describing story information', () => {
+    cy.findByRole('button', {name: 'Title'}).should('exist');
+    cy.findByRole('button', {name: 'Author'}).should('exist');
+    cy.findByRole('button', {name: 'Comments'}).should('exist');
+    cy.findByRole('button', {name: 'Points'}).should('exist');
+    cy.findByText('Actions').should('exist');
+  });
+
   it('has a list of stories based on the initial value in the search box', () => {
     validateStoriesExist('@react-stories');
+  });
+
+  it('sorts stories by the right piece of information when clicking on the column headings', () => {
+    cy.findByRole('link', {name: 'Relicensing React, Jest, Flow, and Immutable.js'});
+
+    const renderedStories = renderedStoryArray();
+
+    console.log(renderedStories);
+
+    const sortedStories = sortBy(renderedStories, 'title');
+
+    console.log(sortedStories);
+
+    const fakeStories = [
+      {
+        title: "something",
+        author: "someone",
+        num_comments: 5,
+        points: 15,
+      },
+      {
+        title: "abc",
+        author: "xyz",
+        num_comments: 13,
+        points: 3,
+      },
+      {
+        title: "something else",
+        author: "someone else",
+        num_comments: 7,
+        points: 42,
+      },
+    ];
+
+    const sortedFakeStories = sortBy(fakeStories, 'title');
+
+    console.log(sortedFakeStories);
+
+    cy.findByRole('button', {name: 'Title'}).click();
   });
 
   it('removes a story from the list upon clicking the Dismiss button', () => {

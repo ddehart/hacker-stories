@@ -23,8 +23,14 @@ const list = [
 ];
 
 describe('The List component', () => {
-  test('renders a list of items', () => {
+  test('renders a list of items with headers', () => {
     render(<List list={ list } />);
+
+    expect(screen.getByRole('button', {name: 'Title'})).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: 'Author'})).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: 'Comments'})).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: 'Points'})).toBeInTheDocument();
+    expect(screen.getByText('Actions')).toBeInTheDocument();
 
     expect(screen.getByText('Road to React')).toBeInTheDocument();
     expect(screen.getByText('Road to Redux')).toBeInTheDocument();

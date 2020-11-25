@@ -9,12 +9,12 @@ describe('The home page', () =>{
       renderedStories.push({
         title: spans[0].innerText,
         author: spans[1].innerText,
-        comments: spans[2].innerText,
+        num_comments: spans[2].innerText,
         points: spans[3].innerText,
       })
     });
 
-    return renderedStories;
+    return cy.wrap(renderedStories);
   };
 
   const validateStoryExists = (story) => {
@@ -93,42 +93,44 @@ describe('The home page', () =>{
   });
 
   it('sorts stories by the right piece of information when clicking on the column headings', () => {
-    cy.findByRole('link', {name: 'Relicensing React, Jest, Flow, and Immutable.js'});
+    cy.get('@react-stories').then(stories => {
+      const sortedTitles = sortBy(stories.hits, 'title').map(story => story.title);
+      const sortByAuthor = sortBy(stories.hits, 'author').map(story => story.author);
+      const sortByComments = sortBy(stories.hits, 'num_comments').reverse().map(story => story.num_comments.toString());
+      const sortByPoints = sortBy(stories.hits, 'points').reverse().map(story => story.points.toString());
 
-    const renderedStories = renderedStoryArray();
+      cy.findByRole('button', {name: 'Title'}).click();
 
-    console.log(renderedStories);
+      renderedStoryArray().then((renderedStories) => {
+        const renderedTitles = renderedStories.map(story => story.title);
 
-    const sortedStories = sortBy(renderedStories, 'title');
+        expect(renderedTitles, 'sorted titles').to.deep.equal(sortedTitles);
+      });
 
-    console.log(sortedStories);
+      cy.findByRole('button', {name: 'Author'}).click();
 
-    const fakeStories = [
-      {
-        title: "something",
-        author: "someone",
-        num_comments: 5,
-        points: 15,
-      },
-      {
-        title: "abc",
-        author: "xyz",
-        num_comments: 13,
-        points: 3,
-      },
-      {
-        title: "something else",
-        author: "someone else",
-        num_comments: 7,
-        points: 42,
-      },
-    ];
+      renderedStoryArray().then((renderedStories) => {
+        const renderedAuthors = renderedStories.map(story => story.author);
 
-    const sortedFakeStories = sortBy(fakeStories, 'title');
+        expect(renderedAuthors, 'sorted authors').to.deep.equal(sortByAuthor);
+      });
 
-    console.log(sortedFakeStories);
+      cy.findByRole('button', {name: 'Comments'}).click();
 
-    cy.findByRole('button', {name: 'Title'}).click();
+      renderedStoryArray().then((renderedStories) => {
+        const renderedComments = renderedStories.map(story => story.num_comments);
+
+        expect(renderedComments, 'sorted comments').to.deep.equal(sortByComments);
+      });
+
+      cy.findByRole('button', {name: 'Points'}).click();
+
+      renderedStoryArray().then((renderedStories) => {
+        const renderedPoints = renderedStories.map(story => story.points);
+
+        expect(renderedPoints, 'sorted points').to.deep.equal(sortByPoints);
+      });
+    });
   });
 
   it('removes a story from the list upon clicking the Dismiss button', () => {

@@ -4,7 +4,7 @@ import './item.css';
 import { ReactComponent as Check } from './assets/check.svg';
 
 const Item = ({ item, onRemoveItem }) => (
-  <div className='story'>
+  <div className='story' data-testid='list-item'>
     <span style={{ width: '40%' }}>
       <a href={item.url}>{item.title}</a>
     </span>

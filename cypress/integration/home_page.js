@@ -1,48 +1,37 @@
 import { sortBy } from 'lodash';
 
 describe('The home page', () =>{
-  const renderedStoryArray = () => {
+  const getRenderedStories = () => {
     const renderedStories = [];
 
-    cy.findByTestId('list-items').children().each(item => {
-      const spans = item.children();
+    Cypress.$('[data-testid="list-items"]').children().each((index, element) => {
+      const spans = element.children;
+
       renderedStories.push({
-        title: spans[0].innerText,
-        author: spans[1].innerText,
-        num_comments: spans[2].innerText,
-        points: spans[3].innerText,
+        title: spans[0].textContent,
+        author: spans[1].textContent,
+        num_comments: spans[2].textContent,
+        points: spans[3].textContent,
       })
     });
 
-    return cy.wrap(renderedStories);
+    return renderedStories;
   };
 
-  const validateStoryExists = (story) => {
-    cy.findByRole('link', {name: story.title}).parent().parent().within(() => {
-      cy.findByRole('link', {name: story.title}).should('have.attr', 'href', story.url);
-      cy.findByText(story.author).should('exist');
-      cy.findByText(story.num_comments.toString()).should('exist');
-      cy.findByText(story.points.toString()).should('exist');
-      cy.findByRole('button', {name: 'Dismiss'}).should('exist');
+  const mapDataToRender = (story) => {
+    return ({
+      title: story.title,
+      author: story.author,
+      num_comments: story.num_comments.toString(),
+      points: story.points.toString(),
     });
   };
 
-  const validateStoriesExist = (fixture) => {
-    cy.get(fixture)
-      .then(stories => {
-        /**
-         * @property {object} stories
-         * @property {array} stories.hits
-         */
-        for (const story of stories.hits) {
-          validateStoryExists(story);
-        }
-      });
-  };
-  beforeEach(() => {
-    cy.fixture('react-stories.json').as('react-stories');
-    cy.fixture('vue-stories.json').as('vue-stories');
-  });
+  const reactStoriesData = require('../fixtures/react-stories.json');
+  const reactStories = reactStoriesData.hits.map(story => mapDataToRender(story));
+
+  const vueStoriesData = require('../fixtures/vue-stories.json');
+  const vueStories = vueStoriesData.hits.map(story => mapDataToRender(story));
 
   it('loads', () => {
     cy.visit('/');
@@ -89,47 +78,37 @@ describe('The home page', () =>{
   });
 
   it('has a list of stories based on the initial value in the search box', () => {
-    validateStoriesExist('@react-stories');
+    const renderedStories = getRenderedStories();
+    expect(renderedStories).to.deep.equal(reactStories);
   });
 
   it('sorts stories by the right piece of information when clicking on the column headings', () => {
-    cy.get('@react-stories').then(stories => {
-      const sortedTitles = sortBy(stories.hits, 'title').map(story => story.title);
-      const sortByAuthor = sortBy(stories.hits, 'author').map(story => story.author);
-      const sortByComments = sortBy(stories.hits, 'num_comments').reverse().map(story => story.num_comments.toString());
-      const sortByPoints = sortBy(stories.hits, 'points').reverse().map(story => story.points.toString());
+    cy.findByRole('button', {name: 'Title'}).click().then(() => {
+      const sortByTitle = sortBy(reactStories, 'title');
+      const renderedStories = getRenderedStories();
 
-      cy.findByRole('button', {name: 'Title'}).click();
+      expect(renderedStories, 'sorted titles').to.deep.equal(sortByTitle);
+    });
 
-      renderedStoryArray().then((renderedStories) => {
-        const renderedTitles = renderedStories.map(story => story.title);
+    cy.findByRole('button', {name: 'Author'}).click().then(() => {
+      const sortByAuthor = sortBy(reactStories, 'author');
+      const renderedStories = getRenderedStories();
 
-        expect(renderedTitles, 'sorted titles').to.deep.equal(sortedTitles);
-      });
+      expect(renderedStories, 'sorted authors').to.deep.equal(sortByAuthor);
+    });
 
-      cy.findByRole('button', {name: 'Author'}).click();
+    cy.findByRole('button', {name: 'Comments'}).click().then(() => {
+      const sortByComments = sortBy(reactStories, (object) => parseInt(object.num_comments)).reverse();
+      const renderedStories = getRenderedStories();
 
-      renderedStoryArray().then((renderedStories) => {
-        const renderedAuthors = renderedStories.map(story => story.author);
+      expect(renderedStories, 'sorted comments').to.deep.equal(sortByComments);
+    });
 
-        expect(renderedAuthors, 'sorted authors').to.deep.equal(sortByAuthor);
-      });
+    cy.findByRole('button', {name: 'Points'}).click().then(() => {
+      const sortByPoints = sortBy(reactStories, (object) => parseInt(object.points)).reverse();
+      const renderedStories = getRenderedStories();
 
-      cy.findByRole('button', {name: 'Comments'}).click();
-
-      renderedStoryArray().then((renderedStories) => {
-        const renderedComments = renderedStories.map(story => story.num_comments);
-
-        expect(renderedComments, 'sorted comments').to.deep.equal(sortByComments);
-      });
-
-      cy.findByRole('button', {name: 'Points'}).click();
-
-      renderedStoryArray().then((renderedStories) => {
-        const renderedPoints = renderedStories.map(story => story.points);
-
-        expect(renderedPoints, 'sorted points').to.deep.equal(sortByPoints);
-      });
+      expect(renderedStories, 'sorted points').to.deep.equal(sortByPoints);
     });
   });
 
@@ -150,18 +129,27 @@ describe('The home page', () =>{
   it('displays different stories after submitting a new search term', () => {
     cy.findByLabelText('Search:').clear();
     cy.findByLabelText('Search:').type('vue');
-    cy.findByRole('button', {name: 'Submit'}).click();
-
-    validateStoriesExist('@vue-stories');
+    cy.findByRole('button', {name: 'Submit'}).click()
+      .then(() => {
+        cy.findByText('Loading ...').should('not.exist');
+      })
+      .then(() => {
+        const renderedStories = getRenderedStories();
+        expect(renderedStories).to.deep.equal(vueStories);
+      });
   });
 
   it('retains the last search term on reload', () => {
     localStorage.setItem('search', 'vue');
 
-    cy.reload();
-
-    cy.findByLabelText('Search:').should('have.value', 'vue');
-
-    validateStoriesExist('@vue-stories');
+    cy.reload(true)
+      .then(() => {
+        cy.findByLabelText('Search:').should('have.value', 'vue')
+        cy.findByText(vueStories[0].title).should('exist');
+      })
+      .then(() => {
+        const renderedStories = getRenderedStories();
+        expect(renderedStories).to.deep.equal(vueStories);
+      });
   });
 });
